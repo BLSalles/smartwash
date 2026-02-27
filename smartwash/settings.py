@@ -13,6 +13,7 @@ DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
+    "jazzmin",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -21,6 +22,49 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'agendamento',
 ]
+
+JAZZMIN_SETTINGS = {
+    "site_title": "SmartWash Admin",
+    "site_header": "SmartWash",
+    "site_brand": "SmartRoutine",
+    "welcome_sign": "Bem-vindo ao painel",
+    "copyright": "SmartRoutine",
+
+    # logo no topo (admin)
+    "site_logo": "agendamento/logo-icon.png",
+    "site_logo_classes": "img-circle",
+    "site_icon": "agendamento/logo-icon.png",
+
+    # menu lateral
+    "show_sidebar": True,
+    "navigation_expanded": True,
+
+    # ícones (Bootstrap Icons / FontAwesome)
+    "icons": {
+        "auth.user": "bi bi-people",
+        "auth.Group": "bi bi-shield-lock",
+        "agendamento.Agendamento": "bi bi-calendar-check",
+        "agendamento.Horario": "bi bi-clock",
+        "agendamento.TipoLavagem": "bi bi-tags",
+    },
+
+    # ordem do menu
+    "order_with_respect_to": [
+        "agendamento",
+        "agendamento.Agendamento",
+        "agendamento.Horario",
+        "agendamento.TipoLavagem",
+        "auth",
+        "auth.user",
+        "auth.Group",
+    ],
+
+    # deixa mais limpo
+    "topmenu_links": [
+        {"name": "Site", "url": "/", "new_window": True},
+        {"model": "auth.User"},
+    ],
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
