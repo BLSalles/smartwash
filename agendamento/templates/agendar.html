@@ -256,6 +256,15 @@ onchange="window.location='?data=' + this.value">
 
 </div>
 
+<div class="col-md-6 mb-3">
+  <label>Tipo de Lavagem</label>
+  <select name="tipo_lavagem" class="form-select" required>
+    <option value="">Selecione</option>
+    {% for t in tipos %}
+      <option value="{{ t.id }}">{{ t.nome }} — R$ {{ t.valor }}</option>
+    {% endfor %}
+  </select>
+</div>
 
 <div class="mb-3">
 
