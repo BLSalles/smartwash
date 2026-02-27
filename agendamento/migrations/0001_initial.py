@@ -40,9 +40,9 @@ class Migration(migrations.Migration):
                         verbose_name="ID",
                     ),
                 ),
-                ("nome", models.CharField(max_length=200)),
-                ("email", models.EmailField(max_length=254)),
-                ("whatsapp", models.CharField(max_length=20)),
+                ("nome", models.CharField(max_length=1000)),
+                ("email", models.EmailField(max_length=1000)),
+                ("whatsapp", models.CharField(max_length=1000)),
                 ("criado_em", models.DateTimeField(auto_now_add=True)),
                 (
                     "horario",

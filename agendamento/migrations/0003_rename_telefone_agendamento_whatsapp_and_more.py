@@ -18,18 +18,18 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name="agendamento",
             name="email",
-            field=models.EmailField(default="sememail@email.com", max_length=254),
+            field=models.EmailField(default="sememail@email.com", max_length=1000),
             preserve_default=False,
         ),
         migrations.AddField(
             model_name="agendamento",
             name="placa",
-            field=models.CharField(default="sememail@email.com", max_length=10),
+            field=models.CharField(default="sememail@email.com", max_length=1000),
             preserve_default=False,
         ),
         migrations.AlterField(
             model_name="agendamento",
             name="nome",
-            field=models.CharField(max_length=100),
+            field=models.CharField(max_length=1000),
         ),
     ]
