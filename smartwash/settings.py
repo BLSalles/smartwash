@@ -44,7 +44,6 @@ JAZZMIN_SETTINGS = {
         "auth.user": "bi bi-people",
         "auth.Group": "bi bi-shield-lock",
         "agendamento.Agendamento": "bi bi-calendar-check",
-        "agendamento.Horario": "bi bi-clock",
         "agendamento.TipoLavagem": "bi bi-tags",
     },
 
@@ -52,7 +51,6 @@ JAZZMIN_SETTINGS = {
     "order_with_respect_to": [
         "agendamento",
         "agendamento.Agendamento",
-        "agendamento.Horario",
         "agendamento.TipoLavagem",
         "auth",
         "auth.user",
