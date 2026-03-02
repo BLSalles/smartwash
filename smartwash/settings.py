@@ -13,6 +13,7 @@ DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
+    'agendamento',
     "jazzmin",
     'django.contrib.admin',
     'django.contrib.auth',
@@ -20,7 +21,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'agendamento',
+    
 ]
 
 JAZZMIN_SETTINGS = {
@@ -82,7 +83,7 @@ ROOT_URLCONF = 'smartwash.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / "templates"],  # ✅ importante
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

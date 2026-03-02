@@ -7,27 +7,96 @@
     .sw-wrap { max-width: 1400px; }
     .sw-grid { display:grid; grid-template-columns: 1fr; gap:16px; }
     @media (min-width: 1100px){ .sw-grid { grid-template-columns: 2fr 1fr; } }
-    .sw-card { border: 1px solid var(--hairline-color, #e5e7eb); border-radius: 14px; background: var(--body-bg); }
-    .sw-card .hd { padding: 14px 16px; border-bottom: 1px solid var(--hairline-color, #e5e7eb); display:flex; align-items:center; justify-content:space-between; gap:12px;}
+
+    .sw-card {
+      border: 1px solid var(--hairline-color, #e5e7eb);
+      border-radius: 14px;
+      background: var(--body-bg);
+      box-shadow: 0 1px 0 rgba(0,0,0,.02);
+    }
+    .sw-card .hd {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--hairline-color, #e5e7eb);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap: wrap;
+    }
     .sw-card .bd { padding: 14px 16px; }
+
     .sw-kpis { display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap:12px; }
     @media (min-width: 800px){ .sw-kpis { grid-template-columns: repeat(4, minmax(0,1fr)); } }
-    .sw-kpi { padding: 12px; border-radius: 12px; border: 1px solid var(--hairline-color, #e5e7eb); background: rgba(0,0,0,.02); }
+
+    .sw-kpi {
+      padding: 12px;
+      border-radius: 12px;
+      border: 1px solid var(--hairline-color, #e5e7eb);
+      background: rgba(0,0,0,.02);
+    }
     .sw-kpi .label { color: #64748b; font-size: 12px; }
     .sw-kpi .value { font-size: 22px; font-weight: 700; margin-top: 4px; }
+
     table.sw-table { width:100%; border-collapse: collapse; }
-    table.sw-table th, table.sw-table td { padding: 8px 10px; border-bottom: 1px solid var(--hairline-color, #e5e7eb); vertical-align: middle; }
-    table.sw-table th { text-align:left; color:#64748b; font-weight:600; font-size:12px; }
+    table.sw-table th, table.sw-table td {
+      padding: 8px 10px;
+      border-bottom: 1px solid var(--hairline-color, #e5e7eb);
+      vertical-align: middle;
+    }
+    table.sw-table th {
+      text-align:left;
+      color:#64748b;
+      font-weight:600;
+      font-size:12px;
+      white-space: nowrap;
+    }
+
     .sw-muted { color:#64748b; font-size:12px; }
+
     .sw-badges { display:flex; gap:8px; flex-wrap:wrap; }
-    .sw-badge { display:inline-flex; align-items:center; gap:6px; border:1px solid var(--hairline-color, #e5e7eb); border-radius:999px; padding:6px 10px; font-size:12px; text-decoration:none; }
+    .sw-badge {
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      border:1px solid var(--hairline-color, #e5e7eb);
+      border-radius:999px;
+      padding:6px 10px;
+      font-size:12px;
+      text-decoration:none;
+      background: rgba(0,0,0,.02);
+    }
+    .sw-badge:hover { filter: brightness(0.98); }
+
     .sw-form { display:flex; gap:10px; flex-wrap:wrap; align-items:end; }
     .sw-form label { display:block; font-size:12px; color:#64748b; margin-bottom:4px; }
-    .sw-form input, .sw-form select { padding:8px 10px; border-radius:10px; border:1px solid var(--hairline-color, #e5e7eb); background: var(--body-bg); min-width: 180px; }
-    .sw-form .btn { padding:9px 12px; border-radius:10px; border:1px solid var(--hairline-color, #e5e7eb); background: #0f172a; color:#fff; cursor:pointer; text-decoration:none; display:inline-flex; align-items:center; gap:8px; }
+    .sw-form input, .sw-form select {
+      padding:8px 10px;
+      border-radius:10px;
+      border:1px solid var(--hairline-color, #e5e7eb);
+      background: var(--body-bg);
+      min-width: 180px;
+    }
+    .sw-form .btn {
+      padding:9px 12px;
+      border-radius:10px;
+      border:1px solid var(--hairline-color, #e5e7eb);
+      background: #0f172a;
+      color:#fff;
+      cursor:pointer;
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      height: 38px;
+    }
     .sw-form .btn.secondary { background: transparent; color: inherit; }
+
     .sw-section { display:grid; grid-template-columns: 1fr; gap:16px; }
     @media (min-width: 900px){ .sw-section { grid-template-columns: 1fr 1fr; } }
+
+    /* deixa os links parecidos com o admin */
+    .sw-table a { text-decoration: none; }
+    .sw-table a:hover { text-decoration: underline; }
   </style>
 {% endblock %}
 
@@ -59,24 +128,26 @@
       <form method="get" class="sw-form">
         <div>
           <label>De</label>
-          <input type="date" name="de" value="{{ f_de }}">
+          <input type="date" name="de" value="{{ f_de|default_if_none:'' }}">
         </div>
         <div>
           <label>Até</label>
-          <input type="date" name="ate" value="{{ f_ate }}">
+          <input type="date" name="ate" value="{{ f_ate|default_if_none:'' }}">
         </div>
         <div>
           <label>Tipo</label>
           <select name="tipo">
             <option value="">Todos</option>
             {% for t in tipos %}
-              <option value="{{ t.id }}" {% if f_tipo == t.id|stringformat:"s" %}selected{% endif %}>{{ t.nome }}</option>
+              {% with tid=t.id|stringformat:"s" %}
+                <option value="{{ t.id }}" {% if f_tipo|stringformat:"s" == tid %}selected{% endif %}>{{ t.nome }}</option>
+              {% endwith %}
             {% endfor %}
           </select>
         </div>
         <div style="flex:1; min-width:240px;">
           <label>Busca (nome/placa/whats)</label>
-          <input type="text" name="q" placeholder="Ex: Bruno / ABC1234" value="{{ f_q }}" style="width:100%; min-width:240px;">
+          <input type="text" name="q" placeholder="Ex: Bruno / ABC1234" value="{{ f_q|default_if_none:'' }}" style="width:100%; min-width:240px;">
         </div>
         <button class="btn" type="submit"><i class="bi bi-funnel"></i> Aplicar</button>
         <a class="btn secondary" href="?"><i class="bi bi-eraser"></i> Limpar</a>
@@ -87,20 +158,26 @@
   <div class="sw-kpis" style="margin-bottom:16px;">
     <div class="sw-kpi">
       <div class="label">Agendamentos (no filtro)</div>
-      <div class="value">{{ total_agendamentos }}</div>
+      <div class="value">{{ total_agendamentos|default:0 }}</div>
     </div>
     <div class="sw-kpi">
       <div class="label">Faturamento (no filtro)</div>
-      <div class="value">R$ {{ total_faturamento|floatformat:2 }}</div>
+      <div class="value">R$ {{ total_faturamento|default:0|floatformat:2 }}</div>
     </div>
     <div class="sw-kpi">
       <div class="label">Período do gráfico</div>
-      <div class="value" style="font-size:16px;">{{ chart_start|date:"d/m" }} → {{ chart_end|date:"d/m" }}</div>
+      <div class="value" style="font-size:16px;">
+        {% if chart_start and chart_end %}
+          {{ chart_start|date:"d/m" }} → {{ chart_end|date:"d/m" }}
+        {% else %}
+          —
+        {% endif %}
+      </div>
     </div>
     <div class="sw-kpi">
       <div class="label">Atalhos</div>
       <div class="value" style="font-size:14px; font-weight:600;">
-        <a href="{% url 'admin:agendamento_agendamento_changelist' %}" style="text-decoration:none;">Ver todos</a>
+        <a href="{% url 'admin:agendamento_agendamento_changelist' %}">Ver todos</a>
       </div>
     </div>
   </div>
@@ -115,7 +192,7 @@
       <div class="bd">
         <div class="sw-section">
           <div>
-            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;">
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; gap:10px; flex-wrap:wrap;">
               <div style="font-weight:800;"><i class="bi bi-sun"></i> Hoje ({{ today|date:"d/m/Y" }})</div>
               <a class="sw-badge" href="{% url 'admin:agendamento_agendamento_changelist' %}?horario__data__exact={{ today|date:'Y-m-d' }}">Abrir lista</a>
             </div>
@@ -125,7 +202,10 @@
                 {% for a in agenda_hoje %}
                   <tr>
                     <td>{{ a.horario.hora|time:"H:i" }}</td>
-                    <td><a href="{% url 'admin:agendamento_agendamento_change' a.id %}">{{ a.nome }}</a><div class="sw-muted">{{ a.whatsapp }}</div></td>
+                    <td>
+                      <a href="{% url 'admin:agendamento_agendamento_change' a.id %}">{{ a.nome }}</a>
+                      <div class="sw-muted">{{ a.whatsapp }}</div>
+                    </td>
                     <td>{{ a.placa }}</td>
                     <td>{{ a.tipo_lavagem.nome }}</td>
                   </tr>
@@ -137,7 +217,7 @@
           </div>
 
           <div>
-            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;">
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; gap:10px; flex-wrap:wrap;">
               <div style="font-weight:800;"><i class="bi bi-calendar2-day"></i> Amanhã ({{ tomorrow|date:"d/m/Y" }})</div>
               <a class="sw-badge" href="{% url 'admin:agendamento_agendamento_changelist' %}?horario__data__exact={{ tomorrow|date:'Y-m-d' }}">Abrir lista</a>
             </div>
@@ -147,7 +227,10 @@
                 {% for a in agenda_amanha %}
                   <tr>
                     <td>{{ a.horario.hora|time:"H:i" }}</td>
-                    <td><a href="{% url 'admin:agendamento_agendamento_change' a.id %}">{{ a.nome }}</a><div class="sw-muted">{{ a.whatsapp }}</div></td>
+                    <td>
+                      <a href="{% url 'admin:agendamento_agendamento_change' a.id %}">{{ a.nome }}</a>
+                      <div class="sw-muted">{{ a.whatsapp }}</div>
+                    </td>
                     <td>{{ a.placa }}</td>
                     <td>{{ a.tipo_lavagem.nome }}</td>
                   </tr>
@@ -160,7 +243,7 @@
         </div>
 
         <div style="margin-top:16px;">
-          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;">
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; gap:10px; flex-wrap:wrap;">
             <div style="font-weight:800;"><i class="bi bi-calendar-week"></i> Próximos 7 dias</div>
             <a class="sw-badge" href="{% url 'admin:agendamento_agendamento_changelist' %}?horario__data__gte={{ tomorrow|date:'Y-m-d' }}&horario__data__lte={{ week_end|date:'Y-m-d' }}">Abrir lista</a>
           </div>
@@ -212,7 +295,10 @@
             <tr>
               <td>{{ a.horario.data|date:"d/m/Y" }}</td>
               <td>{{ a.horario.hora|time:"H:i" }}</td>
-              <td><a href="{% url 'admin:agendamento_agendamento_change' a.id %}">{{ a.nome }}</a><div class="sw-muted">{{ a.whatsapp }}</div></td>
+              <td>
+                <a href="{% url 'admin:agendamento_agendamento_change' a.id %}">{{ a.nome }}</a>
+                <div class="sw-muted">{{ a.whatsapp }}</div>
+              </td>
               <td>{{ a.placa }}</td>
               <td>{{ a.tipo_lavagem.nome }}</td>
               <td>R$ {{ a.tipo_lavagem.valor|floatformat:2 }}</td>
@@ -229,13 +315,14 @@
 
 <script>
   (function(){
-    const labels = {{ chart_labels|safe }};
-    const totals = {{ chart_totals|safe }};
-    const ctx = document.getElementById('faturamentoChart');
+    // ✅ fallback seguro se vier None/empty do backend
+    const labels = {{ chart_labels|default:"[]"|safe }};
+    const totals = {{ chart_totals|default:"[]"|safe }};
 
-    if (!ctx) return;
+    const canvas = document.getElementById('faturamentoChart');
+    if (!canvas || !window.Chart) return;
 
-    new Chart(ctx, {
+    new Chart(canvas, {
       type: 'line',
       data: {
         labels: labels,
@@ -251,7 +338,7 @@
           legend: { display: false },
           tooltip: {
             callbacks: {
-              label: (item) => 'R$ ' + (item.raw ?? 0).toFixed(2)
+              label: (item) => 'R$ ' + (Number(item.raw ?? 0)).toFixed(2)
             }
           }
         },
