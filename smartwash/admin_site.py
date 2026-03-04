@@ -5,7 +5,7 @@ from django.contrib.admin import AdminSite
 from django.db.models import Q, Sum
 from django.utils import timezone
 
-from agendamento.models import Agendamento, TipoLavagem
+from lavagem.models import Agendamento, TipoLavagem
 
 
 def _parse_date(value: str | None) -> date | None:

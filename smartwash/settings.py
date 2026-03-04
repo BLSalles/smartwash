@@ -13,7 +13,7 @@ DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
-    'agendamento',
+    'lavagem',
     "jazzmin",
     'django.contrib.admin',
     'django.contrib.auth',
@@ -50,7 +50,7 @@ JAZZMIN_SETTINGS = {
 
     # ordem do menu
     "order_with_respect_to": [
-        "agendamento",
+        "lavagem",
         "agendamento.Agendamento",
         "agendamento.TipoLavagem",
         "auth",
