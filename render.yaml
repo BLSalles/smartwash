@@ -1,7 +1,6 @@
-
 services:
   - type: web
     name: smartwash
     env: python
-    buildCommand: "./build.sh"
-    startCommand: "gunicorn smartwash.wsgi"
+    buildCommand: "bash build.sh"
+    startCommand: "bash start.sh"

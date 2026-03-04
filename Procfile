@@ -1,1 +1,1 @@
-web: gunicorn smartwash.wsgi:application
+web: bash start.sh
