@@ -8,7 +8,7 @@ import django.utils.timezone
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("agendamento", "0001_initial"),
+        ("lavagem", "0001_initial"),
     ]
 
     operations = [
@@ -65,7 +65,7 @@ class Migration(migrations.Migration):
                 ("criado_em", models.DateTimeField(auto_now_add=True)),
                 (
                     "plano",
-                    models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to="agendamento.planomensal"),
+                    models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to="lavagem.planomensal"),
                 ),
             ],
         ),
@@ -136,22 +136,22 @@ class Migration(migrations.Migration):
                 ("criado_em", models.DateTimeField(auto_now_add=True)),
                 (
                     "assinatura",
-                    models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to="agendamento.assinatura"),
+                    models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to="lavagem.assinatura"),
                 ),
                 (
                     "horario",
-                    models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to="agendamento.horario"),
+                    models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to="lavagem.horario"),
                 ),
                 (
                     "plano_mensal",
-                    models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.PROTECT, to="agendamento.planomensal"),
+                    models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.PROTECT, to="lavagem.planomensal"),
                 ),
             ],
         ),
         migrations.AddField(
             model_name="agendamento",
             name="servicos",
-            field=models.ManyToManyField(blank=True, to="agendamento.servico"),
+            field=models.ManyToManyField(blank=True, to="lavagem.servico"),
         ),
 
         migrations.AddIndex(
