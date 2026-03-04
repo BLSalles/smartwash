@@ -3,6 +3,9 @@ set -e
 
 echo "[start] DJANGO_SETTINGS_MODULE=${DJANGO_SETTINGS_MODULE:-smartwash.settings}"
 
+echo "[start] Ensuring DB schema..."
+python ensure_db.py
+
 echo "[start] Running migrate..."
 python manage.py migrate --noinput
 
