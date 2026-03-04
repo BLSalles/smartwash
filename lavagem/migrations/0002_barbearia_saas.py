@@ -156,10 +156,10 @@ class Migration(migrations.Migration):
 
         migrations.AddIndex(
             model_name="assinatura",
-            index=models.Index(fields=["whatsapp", "ativa"], name="agendamento__whatsapp_ativa"),
+            index=models.Index(fields=["whatsapp", "ativa"], name="lavagem__whatsapp_ativa"),
         ),
         migrations.AddIndex(
             model_name="assinatura",
-            index=models.Index(fields=["email", "ativa"], name="agendamento__email_ativa"),
+            index=models.Index(fields=["email", "ativa"], name="lavagem__email_ativa"),
         ),
     ]
