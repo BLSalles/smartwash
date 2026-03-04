@@ -69,14 +69,14 @@ class Migration(migrations.Migration):
                     "horario",
                     models.OneToOneField(
                         on_delete=django.db.models.deletion.CASCADE,
-                        to="agendamento.horario",
+                        to="lavagem.horario",
                     ),
                 ),
                 (
                     "tipo_lavagem",
                     models.ForeignKey(
                         on_delete=django.db.models.deletion.PROTECT,
-                        to="agendamento.tipolavagem",
+                        to="lavagem.tipolavagem",
                     ),
                 ),
             ],

@@ -44,15 +44,15 @@ JAZZMIN_SETTINGS = {
     "icons": {
         "auth.user": "bi bi-people",
         "auth.Group": "bi bi-shield-lock",
-        "agendamento.Agendamento": "bi bi-calendar-check",
-        "agendamento.TipoLavagem": "bi bi-tags",
+        "lavagem.Agendamento": "bi bi-calendar-check",
+        "lavagem.TipoLavagem": "bi bi-tags",
     },
 
     # ordem do menu
     "order_with_respect_to": [
         "lavagem",
-        "agendamento.Agendamento",
-        "agendamento.TipoLavagem",
+        "lavagem.Agendamento",
+        "lavagem.TipoLavagem",
         "auth",
         "auth.user",
         "auth.Group",
